@@ -1,0 +1,32 @@
+import {v2 as cloudinary} from "cloudinary"
+import fs from "fs"
+import dotenv from "dotenv"
+dotenv.config()
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key:process.env.CLOUD_API_KEY,
+    api_secret:process.env.API_SECRET,
+})
+
+const uploadImage=async(filePath)=>{
+    try{
+        if(!filePath){
+            return null
+        }
+        const result = await cloudinary.uploader.upload(filePath); 
+        console.log(result);
+
+            fs.unlinkSync(filePath);
+
+        return result.secure_url
+    
+} catch (error) {
+    fs.unlinkSync(filePath);
+    
+    console.log(error);
+}
+
+};
+
+export default uploadImage

@@ -1,0 +1,14 @@
+import express, {Router} from "express"
+import { getUserData, login, logout, signUp } from "../controllers/auth.js"
+import { upload } from "../middlewares/multer.js"
+import { checkAuth } from "../middlewares/checkAuth.js"
+
+const authRouter=express.Router()
+
+authRouter.post("/signup",upload.single("profileImage"),signUp)
+authRouter.post("/login",login)
+authRouter.post("/logout",logout)
+authRouter.post("/getuserdata",checkAuth,getUserData)
+
+
+export default authRouter
