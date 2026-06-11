@@ -105,7 +105,7 @@ export const login = async(req,res)=>{
             lastName:existUser.lastName,
             email:existUser.email,
             userName:existUser.userName,
-            profileimage:existUser.profileImage
+            profileImage:existUser.profileImage
         }})
     } catch (error) {
         return res.status(500).json(error)
